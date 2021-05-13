@@ -67,5 +67,11 @@ class TweetsController < ApplicationController
     end
   end
   
+  delete '/tweets/:id' do
+    article = Article.find(params[:id])
+    article.destroy
+    redirect "/articles"
+  end
+  
 
 end
