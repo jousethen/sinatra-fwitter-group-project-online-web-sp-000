@@ -35,7 +35,7 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(params[:id])
       
       if @tweet.user_id == session[:user_id]
-       redirect "/tweets"
+       erb :'tweets/edit'
      else
        redirect "/tweets/#{@tweet.id}"
      end
@@ -71,7 +71,7 @@ class TweetsController < ApplicationController
     tweet = Tweet.find(params[:id])
     if session[:user_id] == tweet.user_id 
       tweet.destroy
-      erb :'tweets/index'
+      redirect "/tweets"
     else
       redirect "/tweets/#{params[:id]}"
     end
