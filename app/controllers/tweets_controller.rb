@@ -68,9 +68,13 @@ class TweetsController < ApplicationController
   end
   
   delete '/tweets/:id' do
-    article = Article.find(params[:id])
-    article.destroy
-    redirect "/articles"
+    tweet = Tweet.find(params[:id])
+    if session[:user_id] == tweet.user_id 
+      tweet.destroy
+      erb :'tweets/index'
+    else
+      redirect "/tweets/#{params[:id]}"
+    end
   end
   
 
